@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Gino kbro</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <script src="Calcular.js" type="text/javascript"></script>
+        <h1>Ingresa tu peso</h1>
+        <form name="peso" method="get" id="pesoform">
+            <label for="Ipeso">Ingrese su peso:</label>
+            <input type="text" id="Ipeso" name="Ipeso" > 
+            <input type="submit" value="Enviar">
+        </form>
+        <p id="mensaje"></p>    
+        <script>
+            document.getElementById('pesoform').addEventListener('submit', function(event) {
+                event.preventDefault(); // Evita que el formulario se envíe
+                var peso = document.getElementById('Ipeso').value;
+                peso = parseFloat(peso); // Convierte el valor a un número
+
+                if (peso > 90) {
+                    reproducirVideo('Video/video'); // Cambia 'ruta/del/video.mp4' por la ruta de tu video
+                } else {
+                    reproducirVideo('Video/gaaa');
+                }
+            });
+            function reproducirVideo(src) {
+                // Verifica si ya existe un elemento de video en el documento
+                var video = document.getElementById('videoReproductor');
+                if (video) {
+                    // Si existe, actualiza la fuente y reinicia el video
+                    console.log("Video encontrado. Actualizando la fuente.");
+                    var source = video.getElementsByTagName('source')[0];
+                    source.src = src;
+                    video.load();
+                    video.play();
+                } else {
+                    // Si no existe, crea un nuevo elemento de video
+                    console.log("No se encontró video. Creando uno nuevo.");
+                    video = document.createElement('video');
+                    video.id = 'videoReproductor';
+                    video.width = 650;
+                    video.height = 450;
+                    video.autoplay = true;
+                    var source = document.createElement('source');
+                    source.src = src;
+                    video.appendChild(source);
+                    document.body.appendChild(video);
+                }
+            }
+        </script>
+    </body>
+</html>
